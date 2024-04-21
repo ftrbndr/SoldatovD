@@ -1,0 +1,55 @@
+﻿<Window x:Class="MyProgram.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyProgram"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Программа" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <TextBox FontSize="35" HorizontalAlignment="Center">Введите начальные данные</TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="Angle" Grid.Row="0" Grid.Column="0" materialDesign:HintAssist.Hint="Угол броска" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Velocity" Grid.Row="0" Grid.Column="1" materialDesign:HintAssist.Hint="Скорость" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Time" Grid.Row="0" Grid.Column="2" materialDesign:HintAssist.Hint="Время" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Obstx" Grid.Row="0" Grid.Column="3" materialDesign:HintAssist.Hint="X препятствия" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Obsty" Grid.Row="0" Grid.Column="4" materialDesign:HintAssist.Hint="Y препятствия" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+            </Grid>
+            <Grid>
+                <Button x:Name="Start" HorizontalAlignment="Center" Content="Запуск" FontSize="20" BorderBrush="Black" BorderThickness="1 1 1 1"></Button>
+                <Button x:Name="Set_var" HorizontalAlignment="Right" Content="Заполнить начальные данные" FontSize="15" BorderBrush="Black" BorderThickness="1 1 1 1"></Button>
+            </Grid>
+            <TextBox FontSize="35" HorizontalAlignment="Center"> Итоговые данные</TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1">Координата x</TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1">Координата y</TextBox>
+                <TextBox Grid.Row="0" Grid.Column="2" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1">Скорость</TextBox>
+                <TextBox x:Name="Finalx" Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Finaly" Grid.Row="1" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+                <TextBox x:Name="Finalv" Grid.Row="1" Grid.Column="2" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1"></TextBox>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
