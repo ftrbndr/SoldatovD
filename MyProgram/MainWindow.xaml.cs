@@ -91,7 +91,7 @@ namespace MyProgram
             Angle.Text = "40";
             Velocity.Text = "100";
             Time.Text = "50";
-            Obstx.Text = "2000";
+            Obstx.Text = "500";
             Obsty.Text = "1000";
         }
          private void Start_click(object sender, RoutedEventArgs e)
