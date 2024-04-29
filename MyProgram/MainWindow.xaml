@@ -8,6 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Программа" Height="450" Width="800">
     <Grid>
+
         <StackPanel>
             <TextBox FontSize="35" HorizontalAlignment="Center" IsReadOnly="True">Введите начальные данные</TextBox>
             <Grid>
@@ -31,6 +32,7 @@
                 <Button x:Name="Start" HorizontalAlignment="Center" Content="Запуск" FontSize="20" BorderBrush="Black" BorderThickness="1 1 1 1"></Button>
                 <Button x:Name="Set_var" HorizontalAlignment="Right" Content="Заполнить начальные данные" FontSize="15" BorderBrush="Black" BorderThickness="1 1 1 1"></Button>
             </Grid>
+            <TextBox x:Name="Event_B" FontSize="20" HorizontalAlignment="Center" IsReadOnly="True" Visibility="Collapsed">Тело попало в препятствие</TextBox>
             <TextBox FontSize="35" HorizontalAlignment="Center" IsReadOnly="True"> Итоговые данные</TextBox>
             <Grid>
                 <Grid.ColumnDefinitions>

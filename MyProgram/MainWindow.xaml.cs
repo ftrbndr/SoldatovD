@@ -20,6 +20,11 @@ namespace MyProgram
         double vstart, tcycle, tstart, tfall, tcollision, tstep, a1, a2, pi = Math.PI, g = 9.81, obstx, obsty;
         double[] xm = new double[10], ym = new double[10], vm = new double[10];
 
+        public delegate void Message();
+        public event Message collision;
+        public event Message ncollision;
+
+
         public void get_var(double _a1, double _vstart, double _tstart, double _obstx, double _obsty) // Передача начальных данных
         {
             a1 = _a1;
@@ -37,7 +42,11 @@ namespace MyProgram
             if (tfall < tstart) tstart = tfall;//Если с момента броска прошло больше времени, задает t1 значение времени приземления
             tcollision = obstx / (vstart * Math.Cos(a2));//Время столкновения тела с препятсвием
             if (tstart >= tcollision && (vstart * tcollision * Math.Sin(a2) - g * tcollision * tcollision / 2) <= obsty)//Проверка попало ли тело в препятствие
+            {
                 tstart = tcollision;// Если тело попало в препятствие tstart приравниваю времени попадания
+                collision();
+            }
+            else ncollision();
             tstep = tstart / 9; // Массив значений будет состоять из 10 элементов, рассчитываю шаг времени такой , чтобы за 10 итераций получить время падения
             for (int i = 0; i < 10; i++, tcycle += tstep)// Заполняю массив
             {
@@ -88,12 +97,23 @@ namespace MyProgram
          private void Start_click(object sender, RoutedEventArgs e)
         {
             MyObj obj = new MyObj();
+            obj.collision += coll;
+            obj.ncollision += ncoll;
             obj.get_var(Convert.ToDouble(Angle.Text), Convert.ToDouble(Velocity.Text), Convert.ToDouble(Time.Text), Convert.ToDouble(Obstx.Text), Convert.ToDouble(Obsty.Text));
             obj.calc();
             Finalx.Text = obj.get_fin_x().ToString();
             Finaly.Text = obj.get_fin_y().ToString();
             Finalv.Text = obj.get_fin_v().ToString();
         }
-       
+       public void coll()
+        {
+            Event_B.Visibility = Visibility.Visible;
+        }
+
+        public void ncoll()
+        {
+            Event_B.Visibility = Visibility.Collapsed;
+        }
+
     }
 }
