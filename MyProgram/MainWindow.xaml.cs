@@ -12,13 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MyProgram
 {
     class MyObj
     {
         double vstart, tcycle, tstart, tfall, tcollision, tstep, a1, a2, pi = Math.PI, g = 9.81, obstx, obsty;
-        double[] xm = new double[10], ym = new double[10], vm = new double[10];
+        static double[] xm = new double[10], ym = new double[10], vm = new double[10];
+        public static int j = 0;
+        public static double x_scale = 0, y_scale = 0;
 
         public delegate void Message();
         public event Message collision;
@@ -60,17 +63,34 @@ namespace MyProgram
             }
         }
 
-        public double get_fin_x()
+        public double get_max_x()
         {
-            return xm[9];
+            double res = obstx;
+            foreach (double x in xm)
+                if (x > res) res = x;
+            return res;
         }
-        public double get_fin_y()
+
+        public double get_max_y()
         {
-            return ym[9];
+            double res = obsty;
+            foreach (double y in ym)
+                if (y > res) res = y;
+            return res;
         }
+
+
         public double get_fin_v()
         {
             return vm[9];
+        }
+        public static double[] get_xm()
+        {
+            return xm;
+        }
+        public static double[] get_ym()
+        {
+            return ym;
         }
     }
 
@@ -101,9 +121,20 @@ namespace MyProgram
             obj.ncollision += ncoll;
             obj.get_var(Convert.ToDouble(Angle.Text), Convert.ToDouble(Velocity.Text), Convert.ToDouble(Time.Text), Convert.ToDouble(Obstx.Text), Convert.ToDouble(Obsty.Text));
             obj.calc();
-            Finalx.Text = obj.get_fin_x().ToString();
-            Finaly.Text = obj.get_fin_y().ToString();
+            Finalx.Text = MyObj.get_xm()[9].ToString();
+            Finaly.Text = MyObj.get_ym()[9].ToString();
             Finalv.Text = obj.get_fin_v().ToString();
+            MyObj.x_scale = obj.get_max_x() / 900;
+            MyObj.y_scale = obj.get_max_y() / 300;
+            Wall.X1 = Convert.ToDouble(Obstx.Text) / MyObj.x_scale;
+            Wall.X2 = Wall.X1;
+            Wall.Y2 = 300 - Convert.ToDouble(Obsty.Text) / MyObj.y_scale;
+            Wall.Visibility = Visibility.Visible;
+            Obj.Visibility = Visibility.Visible;
+            DispatcherTimer tmr = new DispatcherTimer();
+            tmr.Interval = TimeSpan.FromMilliseconds(500);
+            tmr.Tick += TimerOnTick;
+            tmr.Start();
         }
        public void coll()
         {
@@ -115,5 +146,15 @@ namespace MyProgram
             Event_B.Visibility = Visibility.Collapsed;
         }
 
+        public void TimerOnTick(object sender, EventArgs e)
+        {
+            
+            double x = MyObj.get_xm()[MyObj.j] / MyObj.x_scale;
+            double y = MyObj.get_ym()[MyObj.j] / MyObj.y_scale;
+            if (MyObj.j < 9) ++MyObj.j;
+            else MyObj.j = 0;
+            Obj.SetValue(Canvas.LeftProperty, x - 15);
+            Obj.SetValue(Canvas.TopProperty, 300 - y);
+        }
     }
 }
