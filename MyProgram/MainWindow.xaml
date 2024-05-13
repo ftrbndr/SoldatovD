@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyProgram"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Программа" Height="645" Width="1000">
+        Title="Программа" Height="780" Width="1000">
     <Grid>
         <StackPanel>
             <TextBox FontSize="35" HorizontalAlignment="Center" IsReadOnly="True">Введите начальные данные</TextBox>
@@ -55,6 +55,25 @@
                 <Line x:Name="Wall" Y1="300" Stroke="Black" StrokeThickness="4" Visibility="Hidden" ></Line>
                 <Ellipse x:Name="Obj" Canvas.Top="300" Canvas.Left="0" Fill="Red" Height="15" Width="15" StrokeThickness="2" Stroke="Black" Visibility="Hidden"/>
             </Canvas>
+            <TextBox FontSize="35" HorizontalAlignment="Center" IsReadOnly="True">Текущие данные</TextBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True">Координата x</TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True">Координата y</TextBox>
+                <TextBox Grid.Row="0" Grid.Column="2" FontSize="25" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True">Скорость</TextBox>
+                <TextBox x:Name="Currx" Grid.Row="1" Grid.Column="0" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True"></TextBox>
+                <TextBox x:Name="Curry" Grid.Row="1" Grid.Column="1" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True"></TextBox>
+                <TextBox x:Name="Currv" Grid.Row="1" Grid.Column="2" FontSize="20" VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="1 1 1 1" IsReadOnly="True"></TextBox>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

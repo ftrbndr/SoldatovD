@@ -80,9 +80,9 @@ namespace MyProgram
         }
 
 
-        public double get_fin_v()
+        public static double[] get_vm()
         {
-            return vm[9];
+            return vm;
         }
         public static double[] get_xm()
         {
@@ -112,7 +112,7 @@ namespace MyProgram
             Velocity.Text = "100";
             Time.Text = "50";
             Obstx.Text = "500";
-            Obsty.Text = "1000";
+            Obsty.Text = "600";
         }
          private void Start_click(object sender, RoutedEventArgs e)
         {
@@ -123,7 +123,7 @@ namespace MyProgram
             obj.calc();
             Finalx.Text = MyObj.get_xm()[9].ToString();
             Finaly.Text = MyObj.get_ym()[9].ToString();
-            Finalv.Text = obj.get_fin_v().ToString();
+            Finalv.Text = MyObj.get_vm()[9].ToString();
             MyObj.x_scale = obj.get_max_x() / 900;
             MyObj.y_scale = obj.get_max_y() / 300;
             Wall.X1 = Convert.ToDouble(Obstx.Text) / MyObj.x_scale;
@@ -151,10 +151,14 @@ namespace MyProgram
             
             double x = MyObj.get_xm()[MyObj.j] / MyObj.x_scale;
             double y = MyObj.get_ym()[MyObj.j] / MyObj.y_scale;
+            Currx.Text = MyObj.get_xm()[MyObj.j].ToString();
+            Curry.Text = MyObj.get_ym()[MyObj.j].ToString();
+            Currv.Text = MyObj.get_vm()[MyObj.j].ToString();
             if (MyObj.j < 9) ++MyObj.j;
             else MyObj.j = 0;
             Obj.SetValue(Canvas.LeftProperty, x - 15);
             Obj.SetValue(Canvas.TopProperty, 300 - y);
+
         }
     }
 }
