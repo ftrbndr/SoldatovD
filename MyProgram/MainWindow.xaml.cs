@@ -30,6 +30,7 @@ namespace MyProgram
 
         public void get_var(double _a1, double _vstart, double _tstart, double _obstx, double _obsty) // Передача начальных данных
         {
+           
             a1 = _a1;
             vstart = _vstart;
             tstart = _tstart;
@@ -119,22 +120,31 @@ namespace MyProgram
             MyObj obj = new MyObj();
             obj.collision += coll;
             obj.ncollision += ncoll;
-            obj.get_var(Convert.ToDouble(Angle.Text), Convert.ToDouble(Velocity.Text), Convert.ToDouble(Time.Text), Convert.ToDouble(Obstx.Text), Convert.ToDouble(Obsty.Text));
-            obj.calc();
-            Finalx.Text = MyObj.get_xm()[9].ToString();
-            Finaly.Text = MyObj.get_ym()[9].ToString();
-            Finalv.Text = MyObj.get_vm()[9].ToString();
-            MyObj.x_scale = obj.get_max_x() / 900;
-            MyObj.y_scale = obj.get_max_y() / 300;
-            Wall.X1 = Convert.ToDouble(Obstx.Text) / MyObj.x_scale;
-            Wall.X2 = Wall.X1;
-            Wall.Y2 = 300 - Convert.ToDouble(Obsty.Text) / MyObj.y_scale;
-            Wall.Visibility = Visibility.Visible;
-            Obj.Visibility = Visibility.Visible;
-            DispatcherTimer tmr = new DispatcherTimer();
-            tmr.Interval = TimeSpan.FromMilliseconds(500);
-            tmr.Tick += TimerOnTick;
-            tmr.Start();
+            try
+            {
+                input_test(Angle.Text, Velocity.Text, Time.Text, Obstx.Text, Obsty.Text);
+                obj.get_var(Convert.ToDouble(Angle.Text), Convert.ToDouble(Velocity.Text), Convert.ToDouble(Time.Text), Convert.ToDouble(Obstx.Text), Convert.ToDouble(Obsty.Text));
+                obj.calc();
+                Finalx.Text = MyObj.get_xm()[9].ToString();
+                Finaly.Text = MyObj.get_ym()[9].ToString();
+                Finalv.Text = MyObj.get_vm()[9].ToString();
+                MyObj.x_scale = obj.get_max_x() / 900;
+                MyObj.y_scale = obj.get_max_y() / 300;
+                Wall.X1 = Convert.ToDouble(Obstx.Text) / MyObj.x_scale;
+                Wall.X2 = Wall.X1;
+                Wall.Y2 = 300 - Convert.ToDouble(Obsty.Text) / MyObj.y_scale;
+                Wall.Visibility = Visibility.Visible;
+                Obj.Visibility = Visibility.Visible;
+                DispatcherTimer tmr = new DispatcherTimer();
+                tmr.Interval = TimeSpan.FromMilliseconds(500);
+                tmr.Tick += TimerOnTick;
+                tmr.Start();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Введите все данные", "Ошибка");
+            }
+            
         }
        public void coll()
         {
@@ -159,6 +169,11 @@ namespace MyProgram
             Obj.SetValue(Canvas.LeftProperty, x - 15);
             Obj.SetValue(Canvas.TopProperty, 300 - y);
 
+        }
+        public void input_test(string _a1, string _vstart, string _tstart, string _obstx, string _obsty)
+        {
+            if (_a1 == "" || _vstart == "" || _tstart == "" || _obstx == "" || _obsty == "")
+                throw new NullReferenceException();
         }
     }
 }
